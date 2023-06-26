@@ -1,0 +1,1 @@
+The code in this project is licensed under a CC BY-NC 4.0 license. This means you can use it with proper attribution to original authors, indicating if any modifications were done, only for non commercial applications. (https://creativecommons.org/licenses/by-nc/4.0/)
