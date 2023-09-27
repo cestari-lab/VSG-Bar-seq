@@ -1,4 +1,4 @@
-#   *** VSG-Bar-seq ***
+#   *** VSG-BarSeq ***
 
 ## Description
 
