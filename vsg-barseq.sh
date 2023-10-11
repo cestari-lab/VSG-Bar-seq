@@ -2,7 +2,7 @@
 
 sampledir=$1            # Path to directory of input and output files, subfolders will be created here for output files
 data=$2                 # Path or name of input folder containg fastq data
-barcode="$3"/*.txt      # Path to .txt file containing the barcodes, note each barcode (6 or 8 bp) should be in a separate
+barcode=$3		# Path to .txt file containing the barcodes, note each barcode (6 or 8 bp) should be in a separate
 genome=$4               # Path to genome file to use as a reference during mapping with minimap2
 gtf=$5                  # Path to .gtf file for assinging features by featureCounts
 threads=$6              # Number of threads to use for minimap2 alignment and featureCounts from package subread
@@ -15,7 +15,7 @@ mkdir -p "${sampledir}/result_split_fastq/"
 splitfq="${sampledir}/result_split_fastq"
 
 # create a folder for output
-for line in `cat $barcode`
+for line in `cat "$barcode"/*.txt`
 do rcgrep --grepargs "-A 2 -B 1 --no-group-separator" \
  --query "$line" $data/*.fastq > $splitfq/"$line".fastq
 done
@@ -81,7 +81,7 @@ echo processing ... sorting, filtering, indexing with samtools...complete
 
 echo processing ... counting reads per feature with featureCounts
 featureCounts -LO -a $gtf \
--o $count -F "GTF" -t "exon" -g "gene_id" --readExtension3 200 --fraction --primary -T $threads $sorted_bam
+-o $count -F "GTF" -t "exon" -g "gene_id" --fraction --primary -T $threads $sorted_bam
 done
 echo processing ... counting reads per feature with featureCounts...complete
 
@@ -101,3 +101,4 @@ done
 
 
 echo processing ... complete.
+
